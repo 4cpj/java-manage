@@ -1,4 +1,4 @@
-package model;
+package cn.cpj.model;
 
 import javax.persistence.*;
 
@@ -6,11 +6,11 @@ import javax.persistence.*;
  * Created by ye on 2017/10/12
  */
 @Entity
-@Table(name = "collect_content", schema = "cpj", catalog = "")
-public class CollectContent {
+@Table(name = "tag_content", schema = "cpj", catalog = "")
+public class TagContent {
     private long id;
-    private long collectId;
-    private Long answerId;
+    private long tagId;
+    private Long askId;
     private Long articleId;
 
     @Id
@@ -25,23 +25,23 @@ public class CollectContent {
     }
 
     @Basic
-    @Column(name = "collect_id")
-    public long getCollectId() {
-        return collectId;
+    @Column(name = "tag_id")
+    public long getTagId() {
+        return tagId;
     }
 
-    public void setCollectId(long collectId) {
-        this.collectId = collectId;
+    public void setTagId(long tagId) {
+        this.tagId = tagId;
     }
 
     @Basic
-    @Column(name = "answer_id")
-    public Long getAnswerId() {
-        return answerId;
+    @Column(name = "ask_id")
+    public Long getAskId() {
+        return askId;
     }
 
-    public void setAnswerId(Long answerId) {
-        this.answerId = answerId;
+    public void setAskId(Long askId) {
+        this.askId = askId;
     }
 
     @Basic
@@ -59,11 +59,11 @@ public class CollectContent {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CollectContent that = (CollectContent) o;
+        TagContent that = (TagContent) o;
 
         if (id != that.id) return false;
-        if (collectId != that.collectId) return false;
-        if (answerId != null ? !answerId.equals(that.answerId) : that.answerId != null) return false;
+        if (tagId != that.tagId) return false;
+        if (askId != null ? !askId.equals(that.askId) : that.askId != null) return false;
         if (articleId != null ? !articleId.equals(that.articleId) : that.articleId != null) return false;
 
         return true;
@@ -72,8 +72,8 @@ public class CollectContent {
     @Override
     public int hashCode() {
         int result = (int) (id ^ (id >>> 32));
-        result = 31 * result + (int) (collectId ^ (collectId >>> 32));
-        result = 31 * result + (answerId != null ? answerId.hashCode() : 0);
+        result = 31 * result + (int) (tagId ^ (tagId >>> 32));
+        result = 31 * result + (askId != null ? askId.hashCode() : 0);
         result = 31 * result + (articleId != null ? articleId.hashCode() : 0);
         return result;
     }

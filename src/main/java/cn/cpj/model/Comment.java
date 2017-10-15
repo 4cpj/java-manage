@@ -1,4 +1,4 @@
-package model;
+package cn.cpj.model;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
