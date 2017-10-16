@@ -58,6 +58,11 @@ public class LoginController {
                 user1.setPassword(password);
                 user1.setPhone(phone);
                 user1.setNickname(nickname);
+                user1.setConcern(0);
+                user1.setBeConcerned(0);
+                user1.setRank(0);
+                user1.setShowFlag(Byte.valueOf("0"));
+                user1.setSex(Byte.valueOf("0"));
                 user1.setCreateTime(new Timestamp(System.currentTimeMillis()));
                 user1.setUpdateTime(new Timestamp(System.currentTimeMillis()));
                 userDao.save(user1);
