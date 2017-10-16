@@ -2,6 +2,7 @@ package cn.cpj.controller;
 
 import cn.cpj.dao.UserDao;
 import cn.cpj.model.User;
+import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -9,20 +10,36 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.UUID;
 
 /**
  * Created by ye on 2017/10/12
  */
 @RestController
 public class LoginController {
+    Logger logger = Logger.getLogger(LoginController.class);
+
     @Autowired
     private UserDao userDao;
+
+    @RequestMapping("/uid")
+    String uid(HttpSession session) {
+        UUID uid = (UUID) session.getAttribute("uid");
+        if (uid == null) {
+            uid = UUID.randomUUID();
+        }
+        session.setAttribute("uid", uid);
+        return session.getId();
+    }
+
     @RequestMapping("/login")
     public HashMap<String,Object> login(String username,String password) {
         HashMap<String,Object> map = new HashMap<>();
         User user = userDao.findUserByEmailAndPassword(username,password);
+        logger.info(user.getNickname());
         if(user!=null) {
             map.put("returnFlag",true);
             map.put("returnMsg","登录成功");

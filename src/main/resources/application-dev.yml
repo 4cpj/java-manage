@@ -1,8 +1,8 @@
   spring:
     datasource:
-      url: jdbc:mysql://101.132.126.162:3306/cpj?useSSL=false
+      url: jdbc:mysql://localhost:3306/cpj?useSSL=false
       username: root
-      password: mysql
+      password: 
       driver-class-name: com.mysql.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
     jpa:
