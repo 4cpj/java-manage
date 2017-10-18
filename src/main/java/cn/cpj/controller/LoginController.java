@@ -25,6 +25,7 @@ public class LoginController {
     @Autowired
     private UserDao userDao;
 
+    //测试springsession
     @RequestMapping("/uid")
     String uid(HttpSession session) {
         UUID uid = (UUID) session.getAttribute("uid");
@@ -38,7 +39,7 @@ public class LoginController {
     @RequestMapping("/login")
     public HashMap<String,Object> login(String username,String password) {
         HashMap<String,Object> map = new HashMap<>();
-        User user = userDao.findUserByEmailAndPassword(username,password);
+        User user = userDao.findByEmailAndPassword(username,password);
         logger.info(user.getNickname());
         if(user!=null) {
             map.put("returnFlag",true);
@@ -64,7 +65,7 @@ public class LoginController {
             return map;
         }
         if(email!=null&&!"".equals(email)) {
-            User user = userDao.findUserByEmail(email);
+            User user = userDao.findByEmail(email);
             if(user!=null) {
                 map.put("returnFlag",false);
                 map.put("returnMsg","该用户已存在！");
@@ -99,7 +100,7 @@ public class LoginController {
         HashMap<String,Object> map = new HashMap<>();
         String email = request.getParameter("email");
         if(email!=null&&!"".equals(email)) {
-            User user = userDao.findUserByEmail(email);
+            User user = userDao.findByEmail(email);
             if(user!=null) {
                 map.put("returnFlag",false);
                 map.put("returnMsg","该用户已存在！");
