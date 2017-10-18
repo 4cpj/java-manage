@@ -22,3 +22,7 @@
         springframework:
           web: DEBUG
         hibernate: ERROR
+
+  server:
+    port: 8082
+    address: localhost
