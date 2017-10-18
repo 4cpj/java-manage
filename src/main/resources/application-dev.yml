@@ -26,3 +26,8 @@
   server:
     port: 8082
     address: localhost
+    undertow:
+      worker-threads: 20
+      buffer-size: 512
+      buffers-per-region: 512
+      direct-buffers: true

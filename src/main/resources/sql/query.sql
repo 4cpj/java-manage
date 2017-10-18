@@ -1,2 +1,2 @@
---!findUserById 测试sql的编写
+--!findUserById
 select id,nickname,email from user where id=?
