@@ -1,5 +1,7 @@
 package util;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.core.env.MapPropertySource;
 import org.springframework.core.env.PropertySource;
 import org.springframework.core.io.support.EncodedResource;
@@ -16,6 +18,8 @@ import java.util.stream.Collectors;
  *  用于读取写在.sql文件中的sql语句
  */
 public class SqlPropertySourceFactory implements PropertySourceFactory {
+
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private static final String ANNOTATION = "--!";
 
@@ -36,8 +40,8 @@ public class SqlPropertySourceFactory implements PropertySourceFactory {
                 .collect(Collectors.toMap(pair -> pair.key,
                         pair -> String.join(System.lineSeparator(), pair.lines),
                         (r, pair) -> r, LinkedHashMap::new));
-        System.out.println("Configured SQL statements:");
-        sqlMap.forEach((s, o) -> System.out.println(s + "=" + o));
+        logger.info("Configured SQL statements:");
+        sqlMap.forEach((s, o) -> logger.info(s + "=" + o));
         return new MapPropertySource(resource.toString(), sqlMap);
     }
 
